@@ -10,8 +10,14 @@ body {
 .Organism {
   position: absolute; 
   border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid #3498db;
 }
 #test1 {
-  top: 50px;         
+  position: absolute;
+  top: 500px;         
   left: 120px;
+  right: 120px;
+  padding: 50%;
+  margin: 10%;
 }
