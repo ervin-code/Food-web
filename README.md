@@ -1,5 +1,10 @@
 # Food-web
 
+Interactive Food web
 
-Font name/ use:
-font-family: "Titillium Web", sans-serif;
+
+
+# How to use:
+
+Clone it: gh repo clone ervin-code/Food-web
+run it via driect html
