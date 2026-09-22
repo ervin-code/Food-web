@@ -5,4 +5,8 @@ body {
             background-position: center; 
             background-attachment: fixed; 
             background-color: black; 
-        }
+            font-family: "Titillium Web", sans-serif;
+}
+.Organism {
+    background-color: darkcyan;
+}
