@@ -21,3 +21,11 @@ body {
   padding: 50%;
   margin: 10%;
 }
+#test1 {
+  position: absolute;
+  top: 200px;         
+  left: 100px;
+  right: 20px;
+  padding: 50%;
+  margin: 10%;
+}
