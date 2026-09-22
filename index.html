@@ -1,15 +1,190 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Organism Web</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">  
-    </head>
-    <body>
-        <div class="Organism">
-            
-        </div>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Starfield Background</title>
+  <style>
+    /* Reset margins and ensure full screen coverage */
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #000; /* Fallback background */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Position canvas as a fixed background */
+    #starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Keep it behind text content */
+      pointer-events: all; 
+    }
+
+    /* Demonstration overlay content */
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      pointer-events: none; /* Let mouse movements pass through to canvas */
+      user-select: none;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    p {
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Canvas -->
+  <canvas id="starfield"></canvas>
+
+  <!-- Foreground Content -->
+  <div class="content">
+    <h1>Interactive Space</h1>
+    <p>Move your mouse around to steer through the stars.</p>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+
+    // Configuration rules
+    const STAR_COUNT = 400; // Total number of stars
+    let BASE_SPEED = 2;     // Normal travel speed
+    let stars = [];
+
+    // Mouse tracking center offset
+    let mouseX = 0;
+    let mouseY = 0;
+
+    // Initialize/Resize canvas to fit viewport perfectly
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      mouseX = canvas.width / 2;
+      mouseY = canvas.height / 2;
+    }
+
+    // Star Object Class
+    class Star {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        // Random 3D positions
+        this.x = (Math.random() - 0.5) * canvas.width;
+        this.y = (Math.random() - 0.5) * canvas.height;
+        this.z = Math.random() * canvas.width; // Depth factor
+        this.color = `hsl(${Math.random() * 40 + 200}, 100%, 90%)`; // Cool white/blue hues
+      }
+
+      update() {
+        // Move star closer along the Z depth axis
+        this.z -= BASE_SPEED;
+
+        // Reset star if it passes the viewer screen
+        if (this.z <= 0) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        // Project 3D coordinates onto a 2D screen space
+        // Using mouse position to shift the center point (vanishing point perspective)
+        const offsetX = (mouseX - canvas.width / 2) * 0.5;
+        const offsetY = (mouseY - canvas.height / 2) * 0.5;
+
+        const px = (this.x / this.z) * canvas.width + (canvas.width / 2) + offsetX;
+        const py = (this.y / this.z) * canvas.height + (canvas.height / 2) + offsetY;
+        
+        // Calculate size based on depth proximity
+        const size = ((canvas.width - this.z) / canvas.width) * 3;
+
+        // Redraw only if the coordinates remain within visible boundaries
+        if (px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height) {
+          ctx.beginPath();
+          ctx.arc(px, py, Math.max(0.1, size), 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.shadowBlur = size * 2; // Subtle glowing star cluster effect
+          ctx.shadowColor = this.color;
+          ctx.fill();
+        } else {
+          this.reset();
+        }
+      }
+    }
+
+    // Populate the stars array
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < STAR_COUNT; i++) {
+        stars.push(new Star());
+      }
+    }
+
+    // Main animation loop
+    function animate() {
+      // Create a trail effect by blending a slight alpha clear instead of clearing completely
+      ctx.fillStyle = 'rgba(10, 10, 18, 0.2)'; 
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.shadowBlur = 0; // Clear blur for next calculations
+
+      stars.forEach(star => {
+        star.update();
+        star.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    // Event Listeners
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      initStars();
+    });
+
+    // Capture mouse coordinate offsets
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      // Dynamic acceleration based on how far mouse moves from screen center
+      const dx = Math.abs(e.clientX - canvas.width / 2) / (canvas.width / 2);
+      const dy = Math.abs(e.clientY - canvas.height / 2) / (canvas.height / 2);
+      BASE_SPEED = 2 + (dx + dy) * 6; 
+    });
+
+    // Reset default speeds when the mouse leaves the browser pane
+    window.addEventListener('mouseleave', () => {
+      mouseX = canvas.width / 2;
+      mouseY = canvas.height / 2;
+      BASE_SPEED = 2;
+    });
+
+    // Initialize execution
+    resizeCanvas();
+    initStars();
+    animate();
+  </script>
+</body>
 </html>
