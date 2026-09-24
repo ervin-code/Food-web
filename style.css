@@ -1,34 +1,30 @@
 body {
-            background-image: url('https://images.wallpaperscraft.com/image/single/stars_space_universe_170536_300x168.jpg'); 
-            background-repeat: no-repeat; 
-            background-size: cover; 
-            background-position: center; 
-            background-attachment: fixed; 
-            background-color: black; 
-            font-family: "Titillium Web", sans-serif;
-}
+  background-image: url('https://images.wallpaperscraft.com/image/single/stars_space_universe_170536_300x168.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: black;
+  font-family: "Titillium Web", sans-serif;
+} 
 header {
-    color: white;
-    font-family: "Titillium Web", sans-serif;
-  text-align: center
+  color: white;
+  text-align: center;
 }
 .Organism {
-  position: absolute; 
+  position: absolute;
   border-radius: 50%;
   background-color: transparent;
   border: 2px solid #3498db;
-  width: auto;
-  height: auto;
+  width: 50px;
+  height: 50px;
 }
+
 #test1 {
-  position: absolute;
-  top: 50%;         
+  top: 50%;
   left: 120px;
-  right: 120px;
 }
 #test2 {
-  position: absolute;
-  top: 20px;         
+  top: 20px;
   right: 30px;
-
 }
