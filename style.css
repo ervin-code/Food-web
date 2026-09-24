@@ -10,8 +10,7 @@ body {
 header {
     color: white;
     font-family: "Titillium Web", sans-serif;
-    padding-left: 49%;
-    padding-right: 49%;
+  text-align: center
 }
 .Organism {
   position: absolute; 
@@ -21,7 +20,7 @@ header {
 }
 #test1 {
   position: absolute;
-  top: 500px;         
+  top: 50%;         
   left: 120px;
   right: 120px;
 }
