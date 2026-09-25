@@ -13,7 +13,14 @@
       <header>
         <h3>Connection Score = <span id="Score">0</span></h3>
       </header>
-        <img style="position: absolute; top: random(0%, 100%); left: random(0%, 100%);" src="test.png" alt="thing" class="Organism">
-        <img style="position: absolute; top: random(0%, 100%); left: random(0%, 100%);" src="test.png" alt="thing" class="Organism">
+        <img src="test.png" alt="thing" class="Organism">
+        <img src="test.png" alt="thing" class="Organism">
+         <script>
+    const organisums = document.querySelectorAll('.Organism');
+    organisums.forEach(org => {
+      org.style.top = Math.random() * 80 + '%';
+      org.style.left = Math.random() * 80 + '%';
+    });
+  </script>
     </body>
 </html>
