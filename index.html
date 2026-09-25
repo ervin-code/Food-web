@@ -30,11 +30,38 @@
         <img src="imgs/worm.png" alt="worm" class="Organism">
 
         <script>
-            const organisums = document.querySelectorAll('.Organism');
-            organisums.forEach(org => {
-              org.style.top = Math.random() * 80 + '%';
-              org.style.left = Math.random() * 80 + '%';
-           });
+const organisms = document.querySelectorAll('.Organism');
+const placed = [];   
+const widthPct = 10; 
+const heightPct = 10; 
+
+organisms.forEach(org => {
+  let overlap;
+  let top, left;
+  let attempts = 0;
+  org.style.width = widthPct + '%';
+  org.style.height = heightPct + '%';
+  org.style.position = 'absolute';
+  do {
+    overlap = false;
+    top = Math.random() * (100 - heightPct);
+    for (let other of placed) {
+      const horizontalOverlap = left < other.left + widthPct && left + widthPct > other.left;
+      const verticalOverlap = top < other.top + heightPct && top + heightPct > other.top;
+
+      if (horizontalOverlap && verticalOverlap) {
+        overlap = true;
+        break;  
+      }
+    }
+    attempts++;
+    if (attempts > 100) break; 
+  } while (overlap);
+  placed.push({ top, left });
+  org.style.top = top + '%';
+  org.style.left = left + '%';
+});
+
         </script>
     </body>
 </html>
