@@ -1,73 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Organism Web</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <svg id="WebLines"></svg>
-  <header>
-    <h3>Connection Score = <span id="Score">0</span></h3>
-    <button onclick="connectAllOrganisms()">update</button>
-  </header>
-  <img src="imgs/catterpillar.png" alt="catterpillar" class="Organism">
-  <img src="imgs/cricket.png" alt="cricket" class="Organism">
-  <img src="imgs/eagle.png" alt="eagle" class="Organism">
-  <img src="imgs/fox.png" alt="fox" class="Organism">
-  <img src="imgs/frog.png" alt="frog" class="Organism">
-  <img src="imgs/fungi.png" alt="fungi" class="Organism">
-  <img src="imgs/grass.png" alt="grass" class="Organism">
-  <img src="imgs/leaves.png" alt="leaves" class="Organism">
-  <img src="imgs/mouse.png" alt="mouse" class="Organism">
-  <img src="imgs/owl.png" alt="owl" class="Organism">
-  <img src="imgs/rabbit.png" alt="rabbit" class="Organism">
-  <img src="imgs/snake.png" alt="snake" class="Organism">
-  <img src="imgs/spider.png" alt="spider" class="Organism">
-  <img src="imgs/swallow.png" alt="swallow" class="Organism">
-  <img src="imgs/worm.png" alt="worm" class="Organism">
-  <script>
-    const organisms = document.querySelectorAll('.Organism');
-    organisms.forEach(org => {
+    <head>
+        <title>Organism Web</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://googleapis.com">
+        <link rel="preconnect" href="https://gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">  
+    </head>
+    <body>
+      <header>
+        <h3>Connection Score = <span id="Score">0</span></h3>
+      </header>
+        <img src="imgs/catterpillar.png" alt="catterpillar" class="Organism">
+        <img src="imgs/cricket.png" alt="cricket" class="Organism">
+        <img src="imgs/eagle.png" alt="eagle" class="Organism">
+        <img src="imgs/fox.png" alt="fox" class="Organism">
+        <img src="imgs/frog.png" alt="frog" class="Organism">
+        <img src="imgs/fungi.png" alt="fungi" class="Organism">
+        <img src="imgs/grass.png" alt="grass" class="Organism">
+        <img src="imgs/leaves.png" alt="leaves" class="Organism">
+        <img src="imgs/mouse.png" alt="mouse" class="Organism">
+        <img src="imgs/owl.png" alt="owl" class="Organism">
+        <img src="imgs/rabbit.png" alt="rabbit" class="Organism">
+        <img src="imgs/snake.png" alt="snake" class="Organism">
+        <img src="imgs/spider.png" alt="spider" class="Organism">
+        <img src="imgs/swallow.png" alt="swallow" class="Organism">
+        <img src="imgs/worm.png" alt="worm" class="Organism">
+
+         <script>
+    const organisums = document.querySelectorAll('.Organism');
+    organisums.forEach(org => {
       org.style.top = Math.random() * 80 + '%';
       org.style.left = Math.random() * 80 + '%';
     });
-    function connectAllOrganisms() {
-      const svg = document.getElementById('WebLines');
-      const scoreElement = document.getElementById('Score');
-      svg.innerHTML = '';
-      let connectionCount = 0;
-      for (let i = 0; i < organisms.length; i++) {
-        for (let j = i + 1; j < organisms.length; j++) {
-          const orgA = organisms[i];
-          const orgB = organisms[j];
-          const rectA = orgA.getBoundingClientRect();
-          const xA = rectA.left + rectA.width / 2;
-          const yA = rectA.top + rectA.height / 2;
-          const rectB = orgB.getBoundingClientRect();
-          const xB = rectB.left + rectB.width / 2;
-          const yB = rectB.top + rectB.height / 2;
-          const line = document.createElementNS('http://w3.org', 'line');
-          line.setAttribute('x1', xA);
-          line.setAttribute('y1', yA);
-          line.setAttribute('x2', xB);
-          line.setAttribute('y2', yB);
-          line.setAttribute('stroke', 'rgba(255, 255, 255, 0.4)');
-          line.setAttribute('stroke-width', '2');
-          svg.appendChild(line);
-          connectionCount++;
-        }
-      }
-      scoreElement.innerText = connectionCount;
-    }
-    window.addEventListener('resize', () => {
-      const svg = document.getElementById('WebLines');
-      if (svg.innerHTML !== '') {
-        connectAllOrganisms();
-      }
-    });
   </script>
-</body>
+    </body>
 </html>
