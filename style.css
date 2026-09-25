@@ -18,8 +18,6 @@ header {
   border: 5px solid rgb(255, 255, 255);
   width: 50px;
   height: 50px;
-  top: random(0%, 100%);
-  left: random(0%, 100%);
 }
 
 
