@@ -42,16 +42,16 @@
         const web = document.querySelector('#food-web');
         const svg = web.querySelector('.connections');
         const relationships = [
-          ['grass', 'cricket'], ['grass', 'mouse'], ['grass', 'rabbit'],
-          ['leaves', 'caterpillar'], ['leaves', 'cricket'], ['leaves', 'mouse'], ['leaves', 'rabbit'], ['leaves', 'fungi'],
-          ['caterpillar', 'spider'], ['caterpillar', 'frog'], ['caterpillar', 'swallow'],
-          ['cricket', 'spider'], ['cricket', 'frog'], ['cricket', 'swallow'],
-          ['spider', 'frog'], ['spider', 'swallow'],
-          ['worm', 'frog'], ['worm', 'swallow'], ['fungi', 'worm'],
-          ['mouse', 'owl'], ['mouse', 'snake'], ['mouse', 'fox'], ['mouse', 'eagle'],
-          ['rabbit', 'fox'], ['rabbit', 'eagle'],
-          ['frog', 'snake'], ['frog', 'owl'], ['frog', 'eagle'],
-          ['snake', 'owl'], ['snake', 'eagle'], ['swallow', 'owl'], ['swallow', 'eagle']
+          ['cricket', 'grass'], ['mouse', 'grass'], ['rabbit', 'grass'],
+          ['caterpillar', 'leaves'], ['cricket', 'leaves'], ['mouse', 'leaves'], ['rabbit', 'leaves'], ['fungi', 'leaves'],
+          ['spider', 'cricket'], ['frog', 'caterpillar'], ['swallow', 'caterpillar'],
+          ['spider', 'cricket'], ['frog', 'cricket'], ['swallow', 'cricket'],
+          ['frog', 'spider'], ['swallow', 'spider'],
+          ['frog', 'worm'], ['swallow', 'worm'], ['worm', 'fungi'],
+          ['owl', 'mouse'], ['snake', 'mouse'], ['fox', 'mouse'], ['eagle', 'mouse'],
+          ['fox', 'rabbit'], ['eagle', 'rabbit'],
+          ['snake', 'frog'], ['owl', 'frog'], ['eagle', 'frog'],
+          ['owl', 'snake'], ['eagle', 'snake'], ['owl', 'swallow'], ['eagle', 'swallow']
         ];
 
         function drawConnections() {
