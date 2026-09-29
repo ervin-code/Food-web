@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Organism Web</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header>
+    <head>
+        <title>Organism Web</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://googleapis.com">
+        <link rel="preconnect" href="https://gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">  
+    </head>
+    <body>
+      <header>
         <h3>Connection Score = <span id="Score">0</span></h3>
-    </header>
+      </header>
+        <img src="imgs/catterpillar.png" alt="catterpillar" class="Organism">
+        <img src="imgs/cricket.png" alt="cricket" class="Organism">
+        <img src="imgs/eagle.png" alt="eagle" class="Organism">
+        <img src="imgs/fox.png" alt="fox" class="Organism">
+        <img src="imgs/frog.png" alt="frog" class="Organism">
+        <img src="imgs/fungi.png" alt="fungi" class="Organism">
+        <img src="imgs/grass.png" alt="grass" class="Organism">
+        <img src="imgs/leaves.png" alt="leaves" class="Organism">
+        <img src="imgs/mouse.png" alt="mouse" class="Organism">
+        <img src="imgs/owl.png" alt="owl" class="Organism">
+        <img src="imgs/rabbit.png" alt="rabbit" class="Organism">
+        <img src="imgs/snake.png" alt="snake" class="Organism">
+        <img src="imgs/spider.png" alt="spider" class="Organism">
+        <img src="imgs/swallow.png" alt="swallow" class="Organism">
+        <img src="imgs/worm.png" alt="worm" class="Organism">
 
-    <img src="imgs/caterpillar.png" alt="caterpillar" class="Organism thing">
-    <img src="imgs/cricket.png" alt="cricket" class="Organism thing">
-    <img src="imgs/eagle.png" alt="eagle" class="Organism">
-    <img src="imgs/fox.png" alt="fox" class="Organism">
-    <img src="imgs/frog.png" alt="frog" class="Organism">
-    <img src="imgs/fungi.png" alt="fungi" class="Organism">
-    <img src="imgs/grass.png" alt="grass" class="Organism">
-    <img src="imgs/leaves.png" alt="leaves" class="Organism">
-    <img src="imgs/mouse.png" alt="mouse" class="Organism">
-    <img src="imgs/owl.png" alt="owl" class="Organism">
-    <img src="imgs/rabbit.png" alt="rabbit" class="Organism">
-    <img src="imgs/snake.png" alt="snake" class="Organism">
-    <img src="imgs/spider.png" alt="spider" class="Organism">
-    <img src="imgs/swallow.png" alt="swallow" class="Organism">
-    <img src="imgs/worm.png" alt="worm" class="Organism">
-
-    <script>
-        const organisums = document.querySelectorAll('.Organism');
-        organisums.forEach(org => {
-            org.style.top = Math.random() * 80 + '%';
-            org.style.left = Math.random() * 80 + '%';
-        });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-</body>
+         <script>
+    const organisums = document.querySelectorAll('.Organism');
+    organisums.forEach(org => {
+      org.style.top = Math.random() * 80 + '%';
+      org.style.left = Math.random() * 80 + '%';
+    });
+  </script>
+    </body>
 </html>
