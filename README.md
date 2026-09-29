@@ -24,5 +24,5 @@ Organism system (style.css)
 
 (index.HTML)
 
-<img src="test.png" alt="Organism 1" id="test1" class="Organism">
-<img src="test.png" alt="Organism 2" id="test2" class="Organism">
+ # <img src="test.png" alt="Organism 1" id="test1" class="Organism">
+  # <img src="test.png" alt="Organism 2" id="test2" class="Organism">
