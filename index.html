@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Organism Web</title>
         <link rel="stylesheet" href="style.css">
         <link rel="preconnect" href="https://googleapis.com">
@@ -13,28 +14,76 @@
       <header>
         <h3>Connection Score = <span id="Score">0</span></h3>
       </header>
-        <img src="imgs/catterpillar.png" alt="catterpillar" class="Organism">
-        <img src="imgs/cricket.png" alt="cricket" class="Organism">
-        <img src="imgs/eagle.png" alt="eagle" class="Organism">
-        <img src="imgs/fox.png" alt="fox" class="Organism">
-        <img src="imgs/frog.png" alt="frog" class="Organism">
-        <img src="imgs/fungi.png" alt="fungi" class="Organism">
-        <img src="imgs/grass.png" alt="grass" class="Organism">
-        <img src="imgs/leaves.png" alt="leaves" class="Organism">
-        <img src="imgs/mouse.png" alt="mouse" class="Organism">
-        <img src="imgs/owl.png" alt="owl" class="Organism">
-        <img src="imgs/rabbit.png" alt="rabbit" class="Organism">
-        <img src="imgs/snake.png" alt="snake" class="Organism">
-        <img src="imgs/spider.png" alt="spider" class="Organism">
-        <img src="imgs/swallow.png" alt="swallow" class="Organism">
-        <img src="imgs/worm.png" alt="worm" class="Organism">
+      <main class="web" id="food-web" aria-label="Food web">
+        <svg class="connections" aria-hidden="true">
+          <defs>
+            <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L7,3 z" fill="currentColor"></path>
+            </marker>
+          </defs>
+        </svg>
+        <img src="imgs/caterpillar.png" alt="Caterpillar" class="Organism" id="caterpillar" style="--x: 33%; --y: 20%;">
+        <img src="imgs/cricket.png" alt="Cricket" class="Organism" id="cricket" style="--x: 33%; --y: 43%;">
+        <img src="imgs/eagle.png" alt="Eagle" class="Organism" id="eagle" style="--x: 88%; --y: 22%;">
+        <img src="imgs/fox.png" alt="Fox" class="Organism" id="fox" style="--x: 88%; --y: 73%;">
+        <img src="imgs/frog.png" alt="Frog" class="Organism" id="frog" style="--x: 60%; --y: 42%;">
+        <img src="imgs/fungi.png" alt="Fungi" class="Organism" id="fungi" style="--x: 10%; --y: 95%;">
+        <img src="imgs/grass.png" alt="Grass" class="Organism" id="grass" style="--x: 10%; --y: 76%;">
+        <img src="imgs/leaves.png" alt="Leaves" class="Organism" id="leaves" style="--x: 10%; --y: 43%;">
+        <img src="imgs/mouse.png" alt="Mouse" class="Organism" id="mouse" style="--x: 33%; --y: 67%;">
+        <img src="imgs/owl.png" alt="Owl" class="Organism" id="owl" style="--x: 88%; --y: 47%;">
+        <img src="imgs/rabbit.png" alt="Rabbit" class="Organism" id="rabbit" style="--x: 33%; --y: 88%;">
+        <img src="imgs/snake.png" alt="Snake" class="Organism" id="snake" style="--x: 60%; --y: 67%;">
+        <img src="imgs/spider.png" alt="Spider" class="Organism" id="spider" style="--x: 60%; --y: 18%;">
+        <img src="imgs/swallow.png" alt="Swallow" class="Organism" id="swallow" style="--x: 60%; --y: 89%;">
+        <img src="imgs/worm.png" alt="Worm" class="Organism" id="worm" style="--x: 33%; --y: 95%;">
+      </main>
+      <script>
+        const web = document.querySelector('#food-web');
+        const svg = web.querySelector('.connections');
+        const relationships = [
+          ['grass', 'cricket'], ['grass', 'mouse'], ['grass', 'rabbit'],
+          ['leaves', 'caterpillar'], ['leaves', 'cricket'], ['leaves', 'mouse'], ['leaves', 'rabbit'], ['leaves', 'fungi'],
+          ['caterpillar', 'spider'], ['caterpillar', 'frog'], ['caterpillar', 'swallow'],
+          ['cricket', 'spider'], ['cricket', 'frog'], ['cricket', 'swallow'],
+          ['spider', 'frog'], ['spider', 'swallow'],
+          ['worm', 'frog'], ['worm', 'swallow'], ['fungi', 'worm'],
+          ['mouse', 'owl'], ['mouse', 'snake'], ['mouse', 'fox'], ['mouse', 'eagle'],
+          ['rabbit', 'fox'], ['rabbit', 'eagle'],
+          ['frog', 'snake'], ['frog', 'owl'], ['frog', 'eagle'],
+          ['snake', 'owl'], ['snake', 'eagle'], ['swallow', 'owl'], ['swallow', 'eagle']
+        ];
 
-         <script>
-    const organisums = document.querySelectorAll('.Organism');
-    organisums.forEach(org => {
-      org.style.top = Math.random() * 80 + '%';
-      org.style.left = Math.random() * 80 + '%';
-    });
-  </script>
+        function drawConnections() {
+          svg.querySelectorAll('.connection').forEach(line => line.remove());
+          const webBounds = web.getBoundingClientRect();
+
+          relationships.forEach(([foodId, eaterId]) => {
+            const food = document.getElementById(foodId).getBoundingClientRect();
+            const eater = document.getElementById(eaterId).getBoundingClientRect();
+            const startX = food.left + food.width / 2 - webBounds.left;
+            const startY = food.top + food.height / 2 - webBounds.top;
+            const endX = eater.left + eater.width / 2 - webBounds.left;
+            const endY = eater.top + eater.height / 2 - webBounds.top;
+            const distance = Math.hypot(endX - startX, endY - startY);
+            const inset = 34;
+            const offsetX = (endX - startX) / distance * inset;
+            const offsetY = (endY - startY) / distance * inset;
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+
+            line.setAttribute('class', 'connection');
+            line.setAttribute('x1', startX + offsetX);
+            line.setAttribute('y1', startY + offsetY);
+            line.setAttribute('x2', endX - offsetX);
+            line.setAttribute('y2', endY - offsetY);
+            line.setAttribute('marker-end', 'url(#arrowhead)');
+            svg.append(line);
+          });
+        }
+
+        window.addEventListener('resize', drawConnections);
+        window.addEventListener('load', drawConnections);
+        drawConnections();
+      </script>
     </body>
 </html>
