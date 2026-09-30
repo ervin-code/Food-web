@@ -1,89 +1,9 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Organism Web</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="preconnect" href="https://googleapis.com">
-        <link rel="preconnect" href="https://gstatic.com" crossorigin>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">  
-    </head>
-    <body>
-      <header>
-        <h3>Connection Score = <span id="Score">0</span></h3>
-      </header>
-      <main class="web" id="food-web" aria-label="Food web">
-        <svg class="connections" aria-hidden="true">
-          <defs>
-            <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
-              <path d="M0,0 L0,6 L7,3 z" fill="currentColor"></path>
-            </marker>
-          </defs>
-        </svg>
-        <img src="imgs/caterpillar.png" alt="Caterpillar" class="Organism" id="caterpillar" style="--x: 26%; --y: 25%; --organism-color: #f4a261;">
-        <img src="imgs/cricket.png" alt="Cricket" class="Organism" id="cricket" style="--x: 43%; --y: 36%; --organism-color: #8ecae6;">
-        <img src="imgs/eagle.png" alt="Eagle" class="Organism" id="eagle" style="--x: 85%; --y: 16%; --organism-color: #ffd166;">
-        <img src="imgs/fox.png" alt="Fox" class="Organism" id="fox" style="--x: 89%; --y: 72%; --organism-color: #ef476f;">
-        <img src="imgs/frog.png" alt="Frog" class="Organism" id="frog" style="--x: 62%; --y: 43%; --organism-color: #80ed99;">
-        <img src="imgs/fungi.png" alt="Fungi" class="Organism" id="fungi" style="--x: 12%; --y: 88%; --organism-color: #cdb4db;">
-        <img src="imgs/grass.png" alt="Grass" class="Organism" id="grass" style="--x: 7%; --y: 63%; --organism-color: #52b788;">
-        <img src="imgs/leaves.png" alt="Leaves" class="Organism" id="leaves" style="--x: 14%; --y: 36%; --organism-color: #a7c957;">
-        <img src="imgs/mouse.png" alt="Mouse" class="Organism" id="mouse" style="--x: 39%; --y: 66%; --organism-color: #ffb703;">
-        <img src="imgs/owl.png" alt="Owl" class="Organism" id="owl" style="--x: 78%; --y: 45%; --organism-color: #bde0fe;">
-        <img src="imgs/rabbit.png" alt="Rabbit" class="Organism" id="rabbit" style="--x: 28%; --y: 82%; --organism-color: #e5989b;">
-        <img src="imgs/snake.png" alt="Snake" class="Organism" id="snake" style="--x: 68%; --y: 69%; --organism-color: #06d6a0;">
-        <img src="imgs/spider.png" alt="Spider" class="Organism" id="spider" style="--x: 56%; --y: 17%; --organism-color: #b8c0ff;">
-        <img src="imgs/swallow.png" alt="Swallow" class="Organism" id="swallow" style="--x: 72%; --y: 88%; --organism-color: #90dbf4;">
-        <img src="imgs/worm.png" alt="Worm" class="Organism" id="worm" style="--x: 47%; --y: 93%; --organism-color: #caffbf;">
-      </main>
-      <script>
-        const web = document.querySelector('#food-web');
-        const svg = web.querySelector('.connections');
-        const relationships = [
-          ['cricket', 'grass'], ['mouse', 'grass'], ['rabbit', 'grass'],
-          ['caterpillar', 'leaves'], ['cricket', 'leaves'], ['mouse', 'leaves'], ['rabbit', 'leaves'], ['fungi', 'leaves'],
-          ['spider', 'cricket'], ['frog', 'caterpillar'], ['swallow', 'caterpillar'],
-          ['spider', 'cricket'], ['frog', 'cricket'], ['swallow', 'cricket'],
-          ['frog', 'spider'], ['swallow', 'spider'],
-          ['frog', 'worm'], ['swallow', 'worm'], ['worm', 'fungi'],
-          ['owl', 'mouse'], ['snake', 'mouse'], ['fox', 'mouse'], ['eagle', 'mouse'],
-          ['fox', 'rabbit'], ['eagle', 'rabbit'],
-          ['snake', 'frog'], ['owl', 'frog'], ['eagle', 'frog'],
-          ['owl', 'snake'], ['eagle', 'snake'], ['owl', 'swallow'], ['eagle', 'swallow']
-        ];
-
-        function drawConnections() {
-          svg.querySelectorAll('.connection').forEach(line => line.remove());
-          const webBounds = web.getBoundingClientRect();
-
-          relationships.forEach(([foodId, eaterId]) => {
-            const food = document.getElementById(foodId).getBoundingClientRect();
-            const eater = document.getElementById(eaterId).getBoundingClientRect();
-            const startX = food.left + food.width / 2 - webBounds.left;
-            const startY = food.top + food.height / 2 - webBounds.top;
-            const endX = eater.left + eater.width / 2 - webBounds.left;
-            const endY = eater.top + eater.height / 2 - webBounds.top;
-            const distance = Math.hypot(endX - startX, endY - startY);
-            const inset = 34;
-            const offsetX = (endX - startX) / distance * inset;
-            const offsetY = (endY - startY) / distance * inset;
-            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-
-            line.setAttribute('class', 'connection');
-            line.setAttribute('x1', startX + offsetX);
-            line.setAttribute('y1', startY + offsetY);
-            line.setAttribute('x2', endX - offsetX);
-            line.setAttribute('y2', endY - offsetY);
-            line.setAttribute('marker-end', 'url(#arrowhead)');
-            svg.append(line);
-          });
-        }
-
-        window.addEventListener('resize', drawConnections);
-        window.addEventListener('load', drawConnections);
-        drawConnections();
-      </script>
-    </body>
+<head>
+    <meta http-equiv="refresh" content="0;url=public/home.html">
+</head>
+<body>
+    <p>If you are not redirected, <a href="public/home.html"><button>click here</button></a>.</p>
+</body>
 </html>
