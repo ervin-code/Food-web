@@ -1,0 +1,15 @@
+• Frog: 7
+• Cricket: 6
+• Mouse: 6
+• Swallow: 6
+• Leaves: 5
+• Eagle: 5
+• Rabbit: 4
+• Spider: 4
+• Owl: 4
+• Snake: 4
+• Grass: 3
+• Caterpillar: 3
+• Worm: 3
+• Fungi: 2
+• Fox: 2

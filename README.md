@@ -26,3 +26,8 @@ Organism system (style.css)
 
  # <img src="test.png" alt="Organism 1" id="test1" class="Organism">
   # <img src="test.png" alt="Organism 2" id="test2" class="Organism">
+
+
+
+
+<p class="hidden-text" id="mouse-text" style="--x: 39%; --y: 66%; color: white;">This is a test<p>
