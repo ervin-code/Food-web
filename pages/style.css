@@ -63,15 +63,10 @@ header {
 }
 .hidden-text {
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  position: absolute;
-  z-index: 1;
-  top: var(--y);
-  left: var(--x);
+  transition: opacity 0.3s ease;
+  position: absolute; 
 }
 
-.container:hover .hidden-text {
+.test-hide:hover .hidden-text {
   opacity: 1;
-  visibility: visible;
 }
