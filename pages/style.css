@@ -67,6 +67,6 @@ header {
   position: absolute;
   color: black;
 }
-#caterpillar:hover .caterpillar_3 {
+.caterpillar-container:hover .caterpillar_3 {
   opacity: 1;
 }
