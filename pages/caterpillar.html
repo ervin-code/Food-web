@@ -12,6 +12,7 @@
     </head>
     <body>
       <header>
+        <a href="index.html"><button>home</button></a>
         <h3> Total Connection Score = <span id="Score">64</span></h3>
       </header>
       <main class="web" id="food-web" aria-label="Food web">
@@ -22,10 +23,6 @@
             </marker>
           </defs>
         </svg>
-        <div class="caterpillar-container"> 
-        <p class="caterpillar_3" style="--x: 25%; --y: 15%;">Score:<strong>3</strong></p>
-        <a href="caterpillar.html"><img src="imgs/caterpillar.png" alt="Caterpillar" class="Organism" id="caterpillar" style="--x: 26%; --y: 25%; --organism-color: #f4a261;">
-        </a></div>
         <img src="imgs/cricket.png" alt="Cricket" class="Organism" id="cricket" style="--x: 43%; --y: 36%; --organism-color: #8ecae6;">
         <img src="imgs/eagle.png" alt="Eagle" class="Organism" id="eagle" style="--x: 85%; --y: 16%; --organism-color: #ffd166;">
         <img src="imgs/fox.png" alt="Fox" class="Organism" id="fox" style="--x: 89%; --y: 72%; --organism-color: #ef476f;">
@@ -45,17 +42,18 @@
         const web = document.querySelector('#food-web');
         const svg = web.querySelector('.connections');
         const relationships = [
-          ['cricket', 'grass'], ['mouse', 'grass'], ['rabbit', 'grass'],
-          ['caterpillar', 'leaves'], ['cricket', 'leaves'], ['mouse', 'leaves'], ['rabbit', 'leaves'], ['fungi', 'leaves'],
-          ['spider', 'cricket'], ['frog', 'caterpillar'], ['swallow', 'caterpillar'],
-          ['spider', 'cricket'], ['frog', 'cricket'], ['swallow', 'cricket'],
-          ['frog', 'spider'], ['swallow', 'spider'],
-          ['frog', 'worm'], ['swallow', 'worm'], ['worm', 'fungi'],
-          ['owl', 'mouse'], ['snake', 'mouse'], ['fox', 'mouse'], ['eagle', 'mouse'],
-          ['fox', 'rabbit'], ['eagle', 'rabbit'],
-          ['snake', 'frog'], ['owl', 'frog'], ['eagle', 'frog'],
-          ['owl', 'snake'], ['eagle', 'snake'], ['owl', 'swallow'], ['eagle', 'swallow']
+            ['cricket', 'grass'], ['mouse', 'grass'], ['rabbit', 'grass'],
+            ['cricket', 'leaves'], ['mouse', 'leaves'], ['rabbit', 'leaves'], ['fungi', 'leaves'],
+            ['spider', 'cricket'], 
+            ['spider', 'cricket'], ['frog', 'cricket'], ['swallow', 'cricket'],
+            ['frog', 'spider'], ['swallow', 'spider'],
+            ['frog', 'worm'], ['swallow', 'worm'], ['worm', 'fungi'],
+            ['owl', 'mouse'], ['snake', 'mouse'], ['fox', 'mouse'], ['eagle', 'mouse'],
+            ['fox', 'rabbit'], ['eagle', 'rabbit'],
+            ['snake', 'frog'], ['owl', 'frog'], ['eagle', 'frog'],
+            ['owl', 'snake'], ['eagle', 'snake'], ['owl', 'swallow'], ['eagle', 'swallow']
         ];
+
 
         function drawConnections() {
           svg.querySelectorAll('.connection').forEach(line => line.remove());
