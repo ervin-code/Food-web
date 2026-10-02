@@ -31,3 +31,7 @@ Organism system (style.css)
 
 
 <p class="hidden-text" id="mouse-text" style="--x: 39%; --y: 66%; color: white;">This is a test<p>
+
+
+
+<a href="home.html"><button><img src="imgs/home.png" width="30" height="30" class="home"></button></a>
