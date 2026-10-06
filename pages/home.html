@@ -25,7 +25,7 @@
         </svg>
         <div class="caterpillar-container"> 
         <p class="caterpillar_3" style="--x: 25%; --y: 15%;">Score:<strong>3</strong></p>
-        <a href="caterpillar.html"><img src="imgs/caterpillar.png" alt="Caterpillar" class="Organism" id="caterpillar" style="--x: 26%; --y: 25%; --organism-color: #f4a261;">
+        <a href="caterpillar.html" id="caterpillar-link"><img src="imgs/caterpillar.png" alt="Caterpillar" class="Organism" id="caterpillar" style="--x: 26%; --y: 25%; --organism-color: #f4a261;">
         </a></div>
         <img src="imgs/cricket.png" alt="Cricket" class="Organism" id="cricket" style="--x: 43%; --y: 36%; --organism-color: #8ecae6;">
         <img src="imgs/eagle.png" alt="Eagle" class="Organism" id="eagle" style="--x: 85%; --y: 16%; --organism-color: #ffd166;">
@@ -43,6 +43,47 @@
         <img src="imgs/worm.png" alt="Worm" class="Organism" id="worm" style="--x: 47%; --y: 93%; --organism-color: #caffbf;">
       </main>
       <script>
+        const caterpillarLink = document.querySelector('#caterpillar-link');
+        const caterpillar = document.querySelector('#caterpillar');
+        let isEatingCaterpillar = false;
+
+        caterpillarLink.addEventListener('click', event => {
+          event.preventDefault();
+          if (isEatingCaterpillar) return;
+
+          isEatingCaterpillar = true;
+          const web = document.querySelector('#food-web');
+          const webBounds = web.getBoundingClientRect();
+          const caterpillarBounds = caterpillar.getBoundingClientRect();
+          const pacman = document.createElement('img');
+          const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+          pacman.src = 'imgs/pacman.png';
+          pacman.alt = '';
+          pacman.setAttribute('aria-hidden', 'true');
+          pacman.className = 'pacman-animation';
+          pacman.style.left = `${web.clientWidth}px`;
+          pacman.style.top = `${caterpillarBounds.top - webBounds.top}px`;
+          web.append(pacman);
+
+          const animation = pacman.animate(
+            [
+              { left: `${web.clientWidth}px` },
+              { left: `${caterpillarBounds.left - webBounds.left}px` }
+            ],
+            {
+              duration: reducedMotion ? 0 : 900,
+              easing: 'ease-in-out',
+              fill: 'forwards'
+            }
+          );
+
+          animation.onfinish = () => {
+            caterpillar.style.visibility = 'hidden';
+            window.setTimeout(() => window.location.assign(caterpillarLink.href), 180);
+          };
+        });
+
         const web = document.querySelector('#food-web');
         const svg = web.querySelector('.connections');
         const relationships = [
